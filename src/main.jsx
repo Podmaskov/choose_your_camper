@@ -9,8 +9,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Global
       styles={css`
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400..600&display=swap")
-            ${emotionNormalize} html,
-          body {
+          ${emotionNormalize} * {
+          box-sizing: border-box;
+        }
+        body {
           padding: 0;
           margin: 0;
           background: white;
@@ -18,6 +20,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           font-family: "Inter", sans-serif;
           font-size: 16px;
           font-weight: 500;
+        }
+        p {
+          margin: 0;
         }
       `}
     />
