@@ -1,19 +1,24 @@
-import { Avatar } from "./Avatar";
-import { Button } from "./Button";
-import { FilterBtn } from "./FilterBtn";
-import { Input } from "./Input";
-import { Label, variantMap } from "./Label";
-import { Rating } from "./Rating";
-import { Stars } from "./Stars";
-import { Container } from "./Container";
+import { Avatar } from "./Avatar/Avatar";
+import { Button } from "./Button/Button";
+import { FilterBtn } from "./FilterBtn/FilterBtn";
+import { Input } from "./Input/Input";
+import { CarOptionList } from "./CarOption/CarOptionList";
+import { CarOption } from "./CarOption/CarOption";
+import { Rating } from "./Rating/Rating";
+import { Stars } from "./Stars/Stars";
+import { Container } from "./Container/Container";
+import { Located } from "./Located/Located";
+import { BigText } from "./BigText/BigText";
 export {
   Avatar,
   Button,
   FilterBtn,
   Input,
-  Label,
+  CarOptionList,
+  CarOption,
   Rating,
   Stars,
   Container,
-  variantMap,
+  Located,
+  BigText,
 };

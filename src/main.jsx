@@ -24,6 +24,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         p {
           margin: 0;
         }
+        ul {
+          padding: 0;
+          margin: 0;
+        }
       `}
     />
     <App />

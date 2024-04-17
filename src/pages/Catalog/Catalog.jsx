@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { AdCard } from "src/components/AdCard/AdCard";
 
 const Catalog = () => {
   return (
     <div>
-      <h1 css={{ backgroundColor: "hotpink" }}>Caravans page</h1>
-      <Link to="/">Home</Link>
-      <Link to="/favorites">Favorite</Link>
+      <AdCard />
+      {/* <Link to="/">Home</Link>
+      <Link to="/favorites">Favorite</Link> */}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { rootStyle } from "../../../styles/global";
+import { rootStyle } from "src/styles/global";
 
 const InputStyled = styled.input(({ leftIcon, wrightIcon }) => ({
   display: "flex",
