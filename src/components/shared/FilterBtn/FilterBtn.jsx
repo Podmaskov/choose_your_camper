@@ -3,7 +3,7 @@ import { rootStyle } from "src/styles/global";
 const labelStyle = {
   display: "flex",
   justifyContent: "center",
-  width: 115,
+  width: 112,
   height: 95,
   alignItems: "center",
   gap: "8px",
