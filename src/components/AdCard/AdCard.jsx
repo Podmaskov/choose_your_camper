@@ -1,4 +1,12 @@
 import { styles } from "./styles";
+import styled from "@emotion/styled";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addFavorite,
+  removeFavorite,
+} from "src/store/favorites/favoritesSlice";
+
+import { getFavorites } from "src/store/favorites/selectors";
 import {
   Rating,
   Button,
@@ -7,50 +15,61 @@ import {
   BigText,
 } from "src/components/shared";
 import Heart from "src/assets/Heart.svg?react";
+import HeartRed from "src/assets/HeartRed.svg?react";
 
-const details = {
-  airConditioner: 1,
-  bathroom: 1,
-  kitchen: 1,
-  beds: 6,
-  TV: 1,
-  CD: 1,
-  radio: 1,
-  shower: 1,
-  toilet: 1,
-  freezer: 1,
-  hob: 3,
-  microwave: 1,
-  gas: "48kg",
-  water: "196l",
-};
+const FavoriteButton = styled.button({
+  display: "flex",
+  fontSize: 0,
+  alignItems: "center",
+  justifyContent: "center",
+  width: 32,
+  height: 32,
+  border: "none",
+  backgroundColor: "transparent",
+  cursor: "pointer",
+});
 
-export const AdCard = () => {
+export const AdCard = ({ advert }) => {
+  const dispatch = useDispatch();
+  const favorites = useSelector(getFavorites);
+  const {
+    _id,
+    name,
+    price,
+    rating,
+    location,
+    description,
+    details,
+    gallery,
+    reviews,
+  } = advert;
+
+  const handleFavorite = () => {
+    if (favorites.includes(_id)) {
+      dispatch(removeFavorite(_id));
+    } else {
+      dispatch(addFavorite(_id));
+    }
+  };
   return (
     <div style={{ width: 890 }}>
       <div css={styles.wrapper}>
-        <img
-          css={styles.image}
-          src="https://ftp.goit.study/img/campers-test-task/1-1.webp"
-          alt="#"
-        />
+        <img css={styles.image} src={gallery[0]} alt="Car" />
         <div>
           <div css={styles.nameAndPriceWrap}>
-            <BigText>Mavericks</BigText>
+            <BigText>{name}</BigText>
             <div css={styles.priceWrap}>
-              <BigText>€8000</BigText>
-              <Heart />
+              <BigText>{`€${price}`}</BigText>
+              <FavoriteButton type="button" onClick={handleFavorite}>
+                {favorites.includes(_id) ? <HeartRed /> : <Heart />}
+              </FavoriteButton>
             </div>
           </div>
           <div css={styles.ratingAndLocationWrap}>
-            <Rating rating={4.5} reviews={2} />
-            <Located text="Amsterdam, Netherland" />
+            <Rating rating={rating} reviews={reviews.length} />
+            <Located text={location} />
           </div>
-          <p css={styles.descriptionText}>
-            Embrace simplicity and freedom with the Mavericks panel truck, an
-            ideal choice for solo travelers or couples seeking a compact and
-            efficient way to explore the open roads.
-          </p>
+          <p css={styles.descriptionText}>{description}</p>
           <CarOptionList carOptions={details} />
           <Button>Show more</Button>
         </div>
