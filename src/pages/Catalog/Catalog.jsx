@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { fetchAdverts } from "src/store/adverts/operations";
 import { AdCard } from "src/components/AdCard/AdCard";
 
@@ -16,8 +15,6 @@ const Catalog = () => {
   return (
     <div>
       <AdCard />
-      <Link to="/">Home</Link>
-      <Link to="/favorites">Favorite</Link>
     </div>
   );
 };
