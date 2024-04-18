@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import { css } from "@emotion/react";
 import { rootStyle } from "src/styles/global";
 const labelStyle = {
@@ -44,14 +46,14 @@ const infoBlock = {
   gap: 8,
 };
 
-export function FilterBtn({ label, icon: Icon, ...props }) {
+export const FilterBtn = forwardRef(({ label, icon: Icon, ...props }, ref) => {
   return (
     <label css={css(labelStyle)}>
       <div css={css(infoBlock)}>
         <Icon />
         <p css={css(textStyle)}>{label}</p>
-        <input css={css(hideCheckbox)} {...props} />
+        <input ref={ref} css={css(hideCheckbox)} {...props} />
       </div>
     </label>
   );
-}
+});

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { rootStyle } from "src/styles/global";
 import { Input, FilterBtn, Button } from "src/components/shared";
+import { useForm } from "react-hook-form";
 import MapPin from "src/assets/MapPin.svg?react";
 import AC from "src/assets/Wind.svg?react";
 import TV from "src/assets/TV.svg?react";
@@ -40,9 +41,21 @@ const FilterBtnWrap = styled.div(({ extraMargin }) => ({
 }));
 
 export const FilterForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  console.log("Errors", errors);
+
+  const onSubmit = (data) => {
+    console.log("Form data", data);
+  };
   return (
-    <FormStyled>
+    <FormStyled onSubmit={handleSubmit(onSubmit)}>
       <Input
+        {...register("location", { required: true })}
         placeholder="Location"
         label="Location"
         type="text"
@@ -52,21 +65,36 @@ export const FilterForm = () => {
       <SmallText>Filters</SmallText>
       <Title>Vehicle equipment</Title>
       <FilterBtnWrap>
-        <FilterBtn label="AC" icon={AC} type="checkbox" name="equipment" />
         <FilterBtn
+          {...register("equipment")}
+          label="AC"
+          icon={AC}
+          type="checkbox"
+          name="equipment"
+        />
+        <FilterBtn
+          {...register("equipment")}
           label="Automatic"
           icon={Gearbox}
           type="checkbox"
           name="equipment"
         />
         <FilterBtn
+          {...register("equipment")}
           label="Kitchen"
           icon={Kitchen}
           type="checkbox"
           name="equipment"
         />
-        <FilterBtn label="TV" icon={TV} type="checkbox" name="equipment" />
         <FilterBtn
+          {...register("equipment")}
+          label="TV"
+          icon={TV}
+          type="checkbox"
+          name="equipment"
+        />
+        <FilterBtn
+          {...register("equipment")}
           label="Shower/WC"
           icon={Shower}
           type="checkbox"
@@ -75,16 +103,32 @@ export const FilterForm = () => {
       </FilterBtnWrap>
       <Title>Vehicle type</Title>
       <FilterBtnWrap extraMargin>
-        <FilterBtn label="Van" icon={Van} type="radio" name="type" />
         <FilterBtn
+          {...register("vehicleType")}
+          label="Van"
+          icon={Van}
+          type="radio"
+          value="van"
+          name="vehicleType"
+        />
+        <FilterBtn
+          {...register("vehicleType")}
           label="Fully integrated"
           icon={FullyIntegrated}
           type="radio"
-          name="type"
+          value="fullyIntegrated"
+          name="vehicleType"
         />
-        <FilterBtn label="Alcove" icon={Alcove} type="radio" name="type" />
+        <FilterBtn
+          {...register("vehicleType")}
+          label="Alcove"
+          icon={Alcove}
+          type="radio"
+          value="alcove"
+          name="vehicleType"
+        />
       </FilterBtnWrap>
-      <Button>Search</Button>
+      <Button type="submit">Search</Button>
     </FormStyled>
   );
 };

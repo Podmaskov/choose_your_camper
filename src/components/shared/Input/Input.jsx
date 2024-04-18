@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+import { forwardRef } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { rootStyle } from "src/styles/global";
@@ -60,20 +62,24 @@ const leftIconStyle = css(
   iconStyle
 );
 
-export const Input = ({
-  label,
-  leftIcon = false,
-  wrightIcon = false,
-  icon: Icon,
-  ...props
-}) => {
-  return (
-    <LabelStyled>
-      {label}
-      {(leftIcon || wrightIcon) && (
-        <Icon css={wrightIcon ? writeIconStyle : leftIconStyle} />
-      )}
-      <InputStyled {...props} leftIcon={leftIcon} wrightIcon={wrightIcon} />
-    </LabelStyled>
-  );
-};
+export const Input = forwardRef(
+  (
+    { label, leftIcon = false, wrightIcon = false, icon: Icon, ...props },
+    ref
+  ) => {
+    return (
+      <LabelStyled>
+        {label}
+        {(leftIcon || wrightIcon) && (
+          <Icon css={wrightIcon ? writeIconStyle : leftIconStyle} />
+        )}
+        <InputStyled
+          ref={ref}
+          {...props}
+          leftIcon={leftIcon}
+          wrightIcon={wrightIcon}
+        />
+      </LabelStyled>
+    );
+  }
+);
