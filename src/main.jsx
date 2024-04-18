@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import App from "./App.jsx";
 import { Global, css } from "@emotion/react";
 import emotionNormalize from "emotion-normalize";
-import store from "src/store/store";
+import { store, persistor } from "src/store/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -33,7 +34,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       `}
     />
     <Provider store={store}>
-      <App />
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );
