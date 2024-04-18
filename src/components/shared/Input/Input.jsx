@@ -67,7 +67,6 @@ export const Input = ({
   icon: Icon,
   ...props
 }) => {
-  console.log(1, { leftIcon, Icon });
   return (
     <LabelStyled>
       {label}

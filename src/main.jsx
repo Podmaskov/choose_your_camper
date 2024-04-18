@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import App from "./App.jsx";
 import { Global, css } from "@emotion/react";
 import emotionNormalize from "emotion-normalize";
+import store from "src/store/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -30,6 +32,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         }
       `}
     />
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
