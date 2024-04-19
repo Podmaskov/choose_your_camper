@@ -40,20 +40,23 @@ const FilterBtnWrap = styled.div(({ extraMargin }) => ({
   marginBottom: extraMargin ? 64 : 32,
 }));
 
-export const FilterForm = () => {
+export const FilterForm = ({ onSubmit }) => {
   const {
     register,
     handleSubmit,
     // formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      location: "",
+      form: "",
+      details: [],
+    },
+  });
 
-  const onSubmit = (data) => {
-    console.log("Form data", data);
-  };
   return (
     <FormStyled onSubmit={handleSubmit(onSubmit)}>
       <Input
-        {...register("location", { required: true })}
+        {...register("location")}
         placeholder="Location"
         label="Location"
         type="text"
@@ -64,66 +67,71 @@ export const FilterForm = () => {
       <Title>Vehicle equipment</Title>
       <FilterBtnWrap>
         <FilterBtn
-          {...register("equipment")}
+          {...register("details")}
           label="AC"
+          value="airConditioner"
           icon={AC}
           type="checkbox"
-          name="equipment"
+          name="details"
         />
         <FilterBtn
-          {...register("equipment")}
+          {...register("details")}
           label="Automatic"
+          value="transmission"
           icon={Gearbox}
           type="checkbox"
           name="equipment"
         />
         <FilterBtn
-          {...register("equipment")}
+          {...register("details")}
           label="Kitchen"
+          value="kitchen"
           icon={Kitchen}
           type="checkbox"
-          name="equipment"
+          name="details"
         />
         <FilterBtn
-          {...register("equipment")}
+          {...register("details")}
           label="TV"
+          value="TV"
           icon={TV}
           type="checkbox"
-          name="equipment"
+          name="details"
         />
         <FilterBtn
-          {...register("equipment")}
+          {...register("details")}
           label="Shower/WC"
           icon={Shower}
+          value="shower"
           type="checkbox"
-          name="equipment"
+          name="details"
         />
       </FilterBtnWrap>
       <Title>Vehicle type</Title>
       <FilterBtnWrap extraMargin>
         <FilterBtn
-          {...register("vehicleType")}
+          {...register("form")}
           label="Van"
           icon={Van}
           type="radio"
-          value="van"
-          name="vehicleType"
+          value="panelTruck"
+          name="form"
         />
         <FilterBtn
-          {...register("vehicleType")}
+          {...register("form")}
           label="Fully integrated"
           icon={FullyIntegrated}
           type="radio"
           value="fullyIntegrated"
-          name="vehicleType"
+          name="form"
         />
         <FilterBtn
-          {...register("vehicleType")}
+          {...register("form")}
           label="Alcove"
           icon={Alcove}
           type="radio"
           value="alcove"
-          name="vehicleType"
+          name="form"
         />
       </FilterBtnWrap>
       <Button type="submit">Search</Button>

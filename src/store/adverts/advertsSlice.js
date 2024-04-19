@@ -9,6 +9,11 @@ import {
 const initialState = {
   items: [],
   page: 1,
+  filter: {
+    location: "",
+    form: "",
+    details: [],
+  },
   isLoading: false,
   error: null,
 };
@@ -21,12 +26,25 @@ const advertsSlice = createSlice({
     setPage: (state, { payload }) => {
       state.page = payload;
     },
+
+    setFilter: (state, { payload }) => {
+      state.filter = payload;
+      state.page = 1;
+    },
   },
 
   extraReducers: (builder) => {
     builder
       .addCase(fetchAdverts.fulfilled, (state, { payload }) => {
-        state.items = payload;
+        state.items = payload.map((item) => ({
+          ...item,
+          details: {
+            adults: item.adults,
+            transmission: item.transmission,
+            engine: item.engine,
+            ...item.details,
+          },
+        }));
         state.isLoading = false;
       })
       .addMatcher((action) => action.type.endsWith("/pending"), pendingReducer)
@@ -40,6 +58,6 @@ const advertsSlice = createSlice({
       );
   },
 });
-export const { setPage } = advertsSlice.actions;
+export const { setPage, setFilter } = advertsSlice.actions;
 
 export const advertsReducer = advertsSlice.reducer;

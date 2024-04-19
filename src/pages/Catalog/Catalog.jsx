@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAdverts } from "src/store/adverts/operations";
 import { getAdvertsToShow, getAdvertsPage } from "src/store/adverts/selectors";
-import { setPage } from "src/store/adverts/advertsSlice";
+import { setPage, setFilter } from "src/store/adverts/advertsSlice";
 import { AdCard } from "src/components/AdCard/AdCard";
 import { FilterForm } from "src/components/FilterForm/FilterForm";
 import { Button } from "src/components/shared";
@@ -43,9 +43,13 @@ const Catalog = () => {
   const handlerPage = () => {
     dispatch(setPage(page + 1));
   };
+
+  const handelFilter = (data) => {
+    dispatch(setFilter(data));
+  };
   return (
     <CatalogWrapStyled>
-      <FilterForm />
+      <FilterForm onSubmit={handelFilter} />
       <AddCardWrapStyled>
         {adverts.map((advert) => (
           <AdCard key={advert._id} advert={advert} />

@@ -11,7 +11,10 @@ import Toilet from "src/assets/Toilet.svg?react";
 import Shower from "src/assets/Shower.svg?react";
 import Freezer from "src/assets/Freezer.svg?react";
 import Gas from "src/assets/Gas.svg?react";
+import Gearbox from "src/assets/Gearbox.svg?react";
+import Users from "src/assets/Users.svg?react";
 import Water from "src/assets/Water.svg?react";
+import Petrol from "src/assets/Petrol.svg?react";
 import Microwave from "src/assets/Microwave.svg?react";
 
 const CarOptionListScrollWrap = styled.div({
@@ -63,6 +66,9 @@ const OptionLabelMap = {
   microwave: "Microwave",
   gas: "Gas",
   water: "Water",
+  transmission: "Automatic",
+  adults: "Adult",
+  engine: "Petrol",
 };
 
 const IconMap = {
@@ -80,6 +86,9 @@ const IconMap = {
   microwave: Microwave,
   gas: Gas,
   water: Water,
+  transmission: Gearbox,
+  adults: Users,
+  engine: Petrol,
 };
 
 export const CarOptionList = ({ carOptions }) => {
@@ -94,7 +103,18 @@ export const CarOptionList = ({ carOptions }) => {
     }
 
     if (typeof carOptions[key] === "string" && carOptions[key]) {
-      acc.push({ icon: IconMap[key], label: OptionLabelMap[key] });
+      const isItPetrolCar = key === "engine" && carOptions[key] === "petrol";
+      const isItAutomatic =
+        key === "transmission" && carOptions[key] === "automatic";
+      if (isItPetrolCar) {
+        acc.push({ icon: IconMap[key], label: OptionLabelMap[key] });
+      }
+      if (isItAutomatic) {
+        acc.push({ icon: IconMap[key], label: OptionLabelMap[key] });
+      }
+      if (key !== "engine" && key !== "transmission") {
+        acc.push({ icon: IconMap[key], label: OptionLabelMap[key] });
+      }
     }
     return acc;
   }, []);
