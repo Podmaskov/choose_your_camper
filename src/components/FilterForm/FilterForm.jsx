@@ -44,10 +44,8 @@ export const FilterForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
-
-  console.log("Errors", errors);
 
   const onSubmit = (data) => {
     console.log("Form data", data);

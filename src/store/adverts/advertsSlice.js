@@ -8,6 +8,7 @@ import {
 
 const initialState = {
   items: [],
+  page: 1,
   isLoading: false,
   error: null,
 };
@@ -15,6 +16,12 @@ const initialState = {
 const advertsSlice = createSlice({
   name: "adverts",
   initialState,
+
+  reducers: {
+    setPage: (state, { payload }) => {
+      state.page = payload;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -33,5 +40,6 @@ const advertsSlice = createSlice({
       );
   },
 });
+export const { setPage } = advertsSlice.actions;
 
 export const advertsReducer = advertsSlice.reducer;
