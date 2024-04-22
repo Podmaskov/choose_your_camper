@@ -20,3 +20,15 @@ export const Button = styled.button(({ secondary }) => ({
     backgroundColor: secondary ? "transparent" : rootStyle.color.redHover,
   },
 }));
+
+export const IconButton = styled.button({
+  display: "flex",
+  fontSize: 0,
+  alignItems: "center",
+  justifyContent: "center",
+  width: 32,
+  height: 32,
+  border: "none",
+  backgroundColor: "transparent",
+  cursor: "pointer",
+});

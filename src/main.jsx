@@ -24,7 +24,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           font-size: 16px;
           font-weight: 500;
         }
-        p {
+        p,
+        h2 {
           margin: 0;
         }
         ul {

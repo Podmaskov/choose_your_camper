@@ -1,5 +1,4 @@
 import { styles } from "./styles";
-import styled from "@emotion/styled";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addFavorite,
@@ -10,26 +9,17 @@ import { getFavorites } from "src/store/favorites/selectors";
 import {
   Rating,
   Button,
+  IconButton,
   Located,
   CarOptionList,
   BigText,
+  DescriptionText,
+  Image,
 } from "src/components/shared";
 import Heart from "src/assets/Heart.svg?react";
 import HeartRed from "src/assets/HeartRed.svg?react";
 
-const FavoriteButton = styled.button({
-  display: "flex",
-  fontSize: 0,
-  alignItems: "center",
-  justifyContent: "center",
-  width: 32,
-  height: 32,
-  border: "none",
-  backgroundColor: "transparent",
-  cursor: "pointer",
-});
-
-export const AdCard = ({ advert }) => {
+export const AdCard = ({ advert, onShowMore }) => {
   const dispatch = useDispatch();
   const favorites = useSelector(getFavorites);
   const {
@@ -54,24 +44,28 @@ export const AdCard = ({ advert }) => {
   return (
     <div style={{ width: 890 }}>
       <div css={styles.wrapper}>
-        <img css={styles.image} src={gallery[0]} alt="Car" />
+        <Image src={gallery[0]} alt="car" />
         <div>
           <div css={styles.nameAndPriceWrap}>
             <BigText>{name}</BigText>
             <div css={styles.priceWrap}>
               <BigText>{`€${price}`}</BigText>
-              <FavoriteButton type="button" onClick={handleFavorite}>
+              <IconButton type="button" onClick={handleFavorite}>
                 {favorites.includes(_id) ? <HeartRed /> : <Heart />}
-              </FavoriteButton>
+              </IconButton>
             </div>
           </div>
           <div css={styles.ratingAndLocationWrap}>
             <Rating rating={rating} reviews={reviews.length} />
             <Located text={location} />
           </div>
-          <p css={styles.descriptionText}>{description}</p>
+          <DescriptionText whiteSpace width={525} height={24}>
+            {description}
+          </DescriptionText>
           <CarOptionList carOptions={details} />
-          <Button>Show more</Button>
+          <Button type="button" onClick={onShowMore}>
+            Show more
+          </Button>
         </div>
       </div>
     </div>
