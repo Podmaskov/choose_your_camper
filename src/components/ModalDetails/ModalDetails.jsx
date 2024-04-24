@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "@emotion/styled";
 import { getAdvertById } from "src/store/adverts/selectors";
+import { getModalStatus } from "src/store/modal/selectors";
+import { closeModal } from "src/store/modal/modalSlice";
 import { rootStyle } from "src/styles/global";
 import { Modal } from "src/components/shared";
 import {
@@ -78,17 +80,20 @@ const AdditionInfoWrapStyled = styled.div({
   paddingTop: 44,
 });
 
-export const ModalDetails = ({ carId, isModalOpen, closeModal }) => {
-  const advert = useSelector(getAdvertById(carId));
+export const ModalDetails = () => {
+  const dispatch = useDispatch();
+  const advert = useSelector(getAdvertById);
+  const isModalOpen = useSelector(getModalStatus);
+
   const [detailsState, setDetailsState] = useState(
     MODAL_TOGGLER_STATE.features
   );
   return (
-    <Modal isModalOpen={isModalOpen} closeModal={closeModal}>
+    <Modal isModalOpen={isModalOpen} closeModal={() => dispatch(closeModal())}>
       <ModalWrapStyled>
         <TitleWrapStyled>
           <BigText>{advert?.name}</BigText>
-          <IconButton type="button" onClick={closeModal}>
+          <IconButton type="button" onClick={() => dispatch(closeModal())}>
             <Cross />
           </IconButton>
         </TitleWrapStyled>

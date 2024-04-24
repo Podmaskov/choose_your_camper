@@ -1,12 +1,18 @@
 import { createSelector } from "reselect";
+import { getModalAdvertId } from "src/store/modal/selectors";
 export const getAdverts = (state) => state.adverts.items;
 export const getAdvertsFilter = (state) => state.adverts.filter;
 export const getAdvertsPage = (state) => state.adverts.page;
 export const getAdvertsLoading = (state) => state.adverts.loading;
 export const getAdvertsError = (state) => state.adverts.error;
-export const getAdvertById = (advertId) => (state) => {
-  return state.adverts.items.find((advert) => advert._id === advertId);
-};
+
+export const getAdvertById = createSelector(
+  [getModalAdvertId, getAdverts],
+  (advertId, adverts) => {
+    console.log("advertId", advertId);
+    return adverts.find((advert) => advert._id === advertId);
+  }
+);
 
 export const getAdvertsToShow = createSelector(
   [getAdverts, getAdvertsFilter, getAdvertsPage],

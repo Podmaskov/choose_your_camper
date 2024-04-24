@@ -44,7 +44,7 @@ const CarOptionListStyle = styled.ul(({ wrapHeight }) => ({
     display: "none",
   },
   scrollbarWidth: "none",
-  "-ms-overflow-style": "none",
+  msOverflowStyle: "none",
 
   ":hover": {
     cursor: "pointer",

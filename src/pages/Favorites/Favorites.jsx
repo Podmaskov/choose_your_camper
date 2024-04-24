@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "@emotion/styled";
 import { getFavorites } from "src/store/favorites/selectors";
-import { getAdverts } from "src/store/adverts/selectors";
+import { openModal } from "src/store/modal/modalSlice";
 
 import { AdCard } from "src/components/AdCard/AdCard";
 
@@ -15,16 +15,17 @@ const FavoritesWrapStyled = styled.div({
 });
 
 function Favorites() {
-  const adverts = useSelector(getAdverts);
+  const dispatch = useDispatch();
   const favorites = useSelector(getFavorites);
 
-  const favoriteAdverts = adverts.filter((advert) =>
-    favorites.includes(advert._id)
-  );
   return (
     <FavoritesWrapStyled>
-      {favoriteAdverts.map((advert) => (
-        <AdCard key={advert._id} advert={advert} />
+      {favorites.map((advert) => (
+        <AdCard
+          key={advert._id}
+          advert={advert}
+          onShowMore={() => dispatch(openModal(advert._id))}
+        />
       ))}
     </FavoritesWrapStyled>
   );

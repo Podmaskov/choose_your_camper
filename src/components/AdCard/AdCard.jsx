@@ -34,11 +34,14 @@ export const AdCard = ({ advert, onShowMore }) => {
     reviews,
   } = advert;
 
+  const isAddedToFavorites = favorites.some((favorite) => favorite._id === _id);
+
   const handleFavorite = () => {
-    if (favorites.includes(_id)) {
+    if (isAddedToFavorites) {
+      console.log("removeFavorite");
       dispatch(removeFavorite(_id));
     } else {
-      dispatch(addFavorite(_id));
+      dispatch(addFavorite(advert));
     }
   };
   return (
@@ -51,7 +54,7 @@ export const AdCard = ({ advert, onShowMore }) => {
             <div css={styles.priceWrap}>
               <BigText>{`€${price}`}</BigText>
               <IconButton type="button" onClick={handleFavorite}>
-                {favorites.includes(_id) ? <HeartRed /> : <Heart />}
+                {isAddedToFavorites ? <HeartRed /> : <Heart />}
               </IconButton>
             </div>
           </div>
