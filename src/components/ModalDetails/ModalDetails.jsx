@@ -1,15 +1,23 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "@emotion/styled";
 import { getAdvertById } from "src/store/adverts/selectors";
 import { rootStyle } from "src/styles/global";
 import { Modal } from "src/components/shared";
+import {
+  ModalToggler,
+  MODAL_TOGGLER_STATE,
+} from "src/components/ModalDetails/ModalToggler";
+import { ModalFeatures } from "src/components/ModalDetails/ModalFeatures";
+import { ModalReviewList } from "src/components/ModalDetails/ModalReviewList";
+import { ModalReviewCard } from "src/components/ModalDetails/ModalReviewCard";
+import { ModalForm } from "src/components/ModalDetails/ModalForm";
 import Cross from "src/assets/Cross.svg?react";
 import {
   Rating,
   IconButton,
   Located,
   Image,
-  CarOptionList,
   BigText,
   DescriptionText,
 } from "src/components/shared";
@@ -17,7 +25,7 @@ import {
 const ModalWrapStyled = styled.div({
   position: "relative",
   width: 982,
-  height: 720,
+  height: 675,
   padding: "40px 16px 40px 40px",
   borderRadius: 20,
   backgroundColor: rootStyle.color.white,
@@ -28,6 +36,19 @@ const ScrollWrapStyled = styled.div({
   paddingRight: 20,
   marginTop: 24,
   height: 460,
+
+  "::-webkit-scrollbar": {
+    width: 8,
+  },
+  "::-webkit-scrollbar-track": {
+    borderRadius: 7,
+    backgroundColor: "#fff",
+  },
+  "::-webkit-scrollbar-thumb": {
+    borderRadius: 7,
+    backgroundColor: "#D9D9D9",
+    height: 264,
+  },
 });
 
 const TitleWrapStyled = styled.div({
@@ -50,9 +71,18 @@ const ImageWrapStyled = styled.div({
   marginBottom: 24,
 });
 
+const AdditionInfoWrapStyled = styled.div({
+  display: "flex",
+  gap: 24,
+  justifyContent: "center",
+  paddingTop: 44,
+});
+
 export const ModalDetails = ({ carId, isModalOpen, closeModal }) => {
   const advert = useSelector(getAdvertById(carId));
-  console.log("advert", advert);
+  const [detailsState, setDetailsState] = useState(
+    MODAL_TOGGLER_STATE.features
+  );
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal}>
       <ModalWrapStyled>
@@ -74,6 +104,27 @@ export const ModalDetails = ({ carId, isModalOpen, closeModal }) => {
             ))}
           </ImageWrapStyled>
           <DescriptionText>{advert?.description}</DescriptionText>
+          <ModalToggler onClick={setDetailsState} activeState={detailsState} />
+          <AdditionInfoWrapStyled>
+            {detailsState === MODAL_TOGGLER_STATE.reviews && (
+              <ModalReviewList>
+                {advert?.reviews.map(
+                  ({ reviewer_name, reviewer_rating, comment }, index) => (
+                    <ModalReviewCard
+                      key={index}
+                      name={reviewer_name}
+                      rating={reviewer_rating}
+                      description={comment}
+                    />
+                  )
+                )}
+              </ModalReviewList>
+            )}
+            {detailsState === MODAL_TOGGLER_STATE.features && (
+              <ModalFeatures advert={advert} />
+            )}
+            <ModalForm />
+          </AdditionInfoWrapStyled>
         </ScrollWrapStyled>
       </ModalWrapStyled>
     </Modal>

@@ -28,6 +28,7 @@ export const IconButton = styled.button({
   justifyContent: "center",
   width: 32,
   height: 32,
+  padding: 0,
   border: "none",
   backgroundColor: "transparent",
   cursor: "pointer",

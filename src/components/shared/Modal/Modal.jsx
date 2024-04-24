@@ -24,10 +24,12 @@ export const Modal = ({ children, isModalOpen, closeModal }) => {
     };
     if (isModalOpen) {
       document.body.addEventListener("keydown", handlerEscPress);
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
       document.body.removeEventListener("keydown", handlerEscPress);
+      document.body.style.overflow = "auto";
     };
   }, [isModalOpen, closeModal]);
 

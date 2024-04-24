@@ -33,8 +33,8 @@ const CarOptionListScrollWrap = styled.div({
   },
 });
 
-const CarOptionListStyle = styled.ul({
-  maxHeight: 100,
+const CarOptionListStyle = styled.ul(({ wrapHeight }) => ({
+  maxHeight: wrapHeight,
   overflowY: "auto",
   display: "flex",
   flexWrap: "wrap",
@@ -49,7 +49,7 @@ const CarOptionListStyle = styled.ul({
   ":hover": {
     cursor: "pointer",
   },
-});
+}));
 
 const OptionLabelMap = {
   airConditioner: "AC",
@@ -91,7 +91,7 @@ const IconMap = {
   engine: Petrol,
 };
 
-export const CarOptionList = ({ carOptions }) => {
+export const CarOptionList = ({ carOptions, wrapHeight = 100 }) => {
   const peeperCarOption = Object.keys(carOptions).reduce((acc, key) => {
     if (carOptions[key] > 0 && typeof carOptions[key] === "number") {
       acc.push({
@@ -121,7 +121,7 @@ export const CarOptionList = ({ carOptions }) => {
 
   return (
     <CarOptionListScrollWrap>
-      <CarOptionListStyle>
+      <CarOptionListStyle wrapHeight={wrapHeight}>
         {peeperCarOption.map((option, index) => {
           return <CarOption key={index} option={option} />;
         })}

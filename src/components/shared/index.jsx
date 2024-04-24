@@ -2,6 +2,8 @@ import { Avatar } from "./Avatar/Avatar";
 import { Button, IconButton } from "./Button/Button";
 import { FilterBtn } from "./FilterBtn/FilterBtn";
 import { Input } from "./Input/Input";
+import { Textarea } from "./Textarea/Textarea";
+import { DatePicker } from "./Datepicker/Datepicker";
 import { CarOptionList } from "./CarOption/CarOptionList";
 import { CarOption } from "./CarOption/CarOption";
 import { Rating } from "./Rating/Rating";
@@ -18,6 +20,7 @@ export {
   IconButton,
   FilterBtn,
   Input,
+  Textarea,
   CarOptionList,
   CarOption,
   Rating,
@@ -29,4 +32,5 @@ export {
   Modal,
   Portal,
   Image,
+  DatePicker,
 };

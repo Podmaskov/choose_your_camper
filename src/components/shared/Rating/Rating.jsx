@@ -11,7 +11,6 @@ const RaringWrap = styled.p({
 });
 
 export const Rating = ({ rating, reviews }) => {
-  console.log("reviews", reviews);
   return (
     <RaringWrap>
       <Star />

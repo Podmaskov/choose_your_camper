@@ -25,7 +25,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           font-weight: 500;
         }
         p,
-        h2 {
+        h2,
+        h3 {
           margin: 0;
         }
         ul {
