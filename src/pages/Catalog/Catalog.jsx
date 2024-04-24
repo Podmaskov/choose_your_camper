@@ -2,8 +2,13 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useDispatch, useSelector } from "react-redux";
+import { MagnifyingGlass } from "react-loader-spinner";
 import { fetchAdverts } from "src/store/adverts/operations";
-import { getAdvertsToShow, getAdvertsPage } from "src/store/adverts/selectors";
+import {
+  getAdvertsToShow,
+  getAdvertsPage,
+  getAdvertsLoading,
+} from "src/store/adverts/selectors";
 import { setPage, setFilter } from "src/store/adverts/advertsSlice";
 import { openModal } from "src/store/modal/modalSlice";
 import { AdCard } from "src/components/AdCard/AdCard";
@@ -23,6 +28,11 @@ const AddCardWrapStyled = styled.div({
   gap: 32,
 });
 
+const LoaderStyled = styled(MagnifyingGlass)({
+  marginLeft: "auto",
+  marginRight: "auto",
+});
+
 const buttonStyle = css({
   width: 147,
   margin: "auto",
@@ -32,8 +42,10 @@ const buttonStyle = css({
 const Catalog = () => {
   const dispatch = useDispatch();
   const adverts = useSelector(getAdvertsToShow);
+  const isAdvertsLoading = useSelector(getAdvertsLoading);
   const page = useSelector(getAdvertsPage);
 
+  console.log("isAdvertsLoading", isAdvertsLoading);
   useEffect(() => {
     const promise = dispatch(fetchAdverts());
     return () => {
@@ -53,16 +65,32 @@ const Catalog = () => {
     <CatalogWrapStyled>
       <FilterForm onSubmit={handelFilter} />
       <AddCardWrapStyled>
-        {adverts.map((advert) => (
-          <AdCard
-            key={advert._id}
-            advert={advert}
-            onShowMore={() => dispatch(openModal(advert._id))}
-          />
-        ))}
-        <Button css={buttonStyle} type="button" secondary onClick={handlerPage}>
-          Load more
-        </Button>
+        <LoaderStyled
+          visible={isAdvertsLoading}
+          height="80"
+          width="890"
+          ariaLabel="magnifying-glass-loading"
+          glassColor="#c0efff"
+          color="#e15b64"
+        />
+        {!isAdvertsLoading &&
+          adverts.map((advert) => (
+            <AdCard
+              key={advert._id}
+              advert={advert}
+              onShowMore={() => dispatch(openModal(advert._id))}
+            />
+          ))}
+        {!isAdvertsLoading && (
+          <Button
+            css={buttonStyle}
+            type="button"
+            secondary
+            onClick={handlerPage}
+          >
+            Load more
+          </Button>
+        )}
       </AddCardWrapStyled>
     </CatalogWrapStyled>
   );

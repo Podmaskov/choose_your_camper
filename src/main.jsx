@@ -8,7 +8,7 @@ import emotionNormalize from "emotion-normalize";
 import { store, persistor } from "src/store/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <>
     <Global
       styles={css`
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400..600&display=swap")
@@ -40,5 +40,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <App />
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+  </>
 );
