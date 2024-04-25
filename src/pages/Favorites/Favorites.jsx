@@ -20,13 +20,15 @@ function Favorites() {
 
   return (
     <FavoritesWrapStyled>
-      {favorites.map((advert) => (
-        <AdCard
-          key={advert._id}
-          advert={advert}
-          onShowMore={() => dispatch(openModal(advert._id))}
-        />
-      ))}
+      {favorites.length
+        ? favorites.map((advert) => (
+            <AdCard
+              key={advert._id}
+              advert={advert}
+              onShowMore={() => dispatch(openModal(advert._id))}
+            />
+          ))
+        : "No favorites yet :("}
     </FavoritesWrapStyled>
   );
 }
