@@ -7,7 +7,7 @@ const Favorites = lazy(() => import("src/pages/Favorites/Favorites"));
 
 function App() {
   return (
-    <BrowserRouter basename="choose_your_camper">
+    <BrowserRouter basename="/choose_your_camper">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
