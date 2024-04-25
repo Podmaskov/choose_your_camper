@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 
+export const ModalReviewList = ({ children }) => {
+  return <ReviewListStyled>{children}</ReviewListStyled>;
+};
+
 const ReviewListStyled = styled.ul({
   display: "flex",
   flexDirection: "column",
@@ -7,7 +11,3 @@ const ReviewListStyled = styled.ul({
   listStyle: "none",
   overflowY: "auto",
 });
-
-export const ModalReviewList = ({ children }) => {
-  return <ReviewListStyled>{children}</ReviewListStyled>;
-};

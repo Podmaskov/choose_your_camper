@@ -1,6 +1,31 @@
 import styled from "@emotion/styled";
 import { rootStyle } from "src/styles/global";
 
+export const MODAL_TOGGLER_STATE = {
+  features: "features",
+  reviews: "reviews",
+};
+export const ModalToggler = ({ onClick, activeState }) => {
+  return (
+    <ModalTogglerWrapStyled>
+      <ButtonsStyled
+        isActive={activeState === MODAL_TOGGLER_STATE.features}
+        type="button"
+        onClick={() => onClick(MODAL_TOGGLER_STATE.features)}
+      >
+        Features
+      </ButtonsStyled>
+      <ButtonsStyled
+        isActive={activeState === MODAL_TOGGLER_STATE.reviews}
+        type="button"
+        onClick={() => onClick(MODAL_TOGGLER_STATE.reviews)}
+      >
+        Reviews
+      </ButtonsStyled>
+    </ModalTogglerWrapStyled>
+  );
+};
+
 const ModalTogglerWrapStyled = styled.div({
   display: "flex",
   gap: 40,
@@ -41,28 +66,3 @@ const ButtonsStyled = styled.button(({ isActive }) => ({
     transition: rootStyle.transition.general("opacity"),
   },
 }));
-
-export const MODAL_TOGGLER_STATE = {
-  features: "features",
-  reviews: "reviews",
-};
-export const ModalToggler = ({ onClick, activeState }) => {
-  return (
-    <ModalTogglerWrapStyled>
-      <ButtonsStyled
-        isActive={activeState === MODAL_TOGGLER_STATE.features}
-        type="button"
-        onClick={() => onClick(MODAL_TOGGLER_STATE.features)}
-      >
-        Features
-      </ButtonsStyled>
-      <ButtonsStyled
-        isActive={activeState === MODAL_TOGGLER_STATE.reviews}
-        type="button"
-        onClick={() => onClick(MODAL_TOGGLER_STATE.reviews)}
-      >
-        Reviews
-      </ButtonsStyled>
-    </ModalTogglerWrapStyled>
-  );
-};

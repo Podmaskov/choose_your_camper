@@ -1,7 +1,16 @@
 import styled from "@emotion/styled";
 import Star from "src/assets/Star.svg?react";
 
-const RaringWrap = styled.p({
+export const Rating = ({ rating, reviews }) => {
+  return (
+    <RaringWrapStyled>
+      <Star />
+      {`${rating}(${reviews} Reviews)`}
+    </RaringWrapStyled>
+  );
+};
+
+const RaringWrapStyled = styled.p({
   display: "flex",
   alignItems: "center",
   gap: 4,
@@ -9,12 +18,3 @@ const RaringWrap = styled.p({
   lineHeight: 1.5,
   textDecorationLine: "underline",
 });
-
-export const Rating = ({ rating, reviews }) => {
-  return (
-    <RaringWrap>
-      <Star />
-      {`${rating}(${reviews} Reviews)`}
-    </RaringWrap>
-  );
-};

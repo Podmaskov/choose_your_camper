@@ -1,8 +1,21 @@
 /* eslint-disable react/display-name */
 import { forwardRef } from "react";
-import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import { rootStyle } from "src/styles/global";
-const labelStyle = {
+
+export const FilterBtn = forwardRef(({ label, icon: Icon, ...props }, ref) => {
+  return (
+    <LabelStyled>
+      <BoxStyled>
+        <Icon width={32} height={32} />
+        <TextStyled>{label}</TextStyled>
+        <HidedCheckboxStyled ref={ref} {...props} />
+      </BoxStyled>
+    </LabelStyled>
+  );
+});
+
+const LabelStyled = styled.label({
   display: "flex",
   justifyContent: "center",
   width: 112,
@@ -18,15 +31,16 @@ const labelStyle = {
   ':has(input[type="radio"]:checked)': {
     border: `1px solid ${rootStyle.color.red}`,
   },
-};
-const textStyle = {
+});
+
+const TextStyled = styled.p({
   color: rootStyle.color.black,
   textAlign: "center",
   margin: 0,
   lineHeight: 1.25,
-};
+});
 
-const hideCheckbox = {
+const HidedCheckboxStyled = styled.input({
   position: "absolute",
   width: 1,
   height: 1,
@@ -37,23 +51,11 @@ const hideCheckbox = {
   clipPath: "inset(100%)",
   clip: "rect(0 0 0 0)",
   overflow: "hidden",
-};
+});
 
-const infoBlock = {
+const BoxStyled = styled.div({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   gap: 8,
-};
-
-export const FilterBtn = forwardRef(({ label, icon: Icon, ...props }, ref) => {
-  return (
-    <label css={css(labelStyle)}>
-      <div css={css(infoBlock)}>
-        <Icon width={32} height={32} />
-        <p css={css(textStyle)}>{label}</p>
-        <input ref={ref} css={css(hideCheckbox)} {...props} />
-      </div>
-    </label>
-  );
 });

@@ -1,5 +1,9 @@
 import { createSelector } from "reselect";
 import { getModalAdvertId } from "src/store/modal/selectors";
+import { getFavorites } from "src/store/favorites/selectors";
+
+const NUMBER_ADDED_ITEMS = 4;
+
 export const getAdverts = (state) => state.adverts.items;
 export const getAdvertsFilter = (state) => state.adverts.filter;
 export const getAdvertsPage = (state) => state.adverts.page;
@@ -7,17 +11,19 @@ export const getAdvertsLoading = (state) => state.adverts.isLoading;
 export const getAdvertsError = (state) => state.adverts.error;
 
 export const getAdvertById = createSelector(
-  [getModalAdvertId, getAdverts],
-  (advertId, adverts) => {
-    console.log("advertId", advertId);
-    return adverts.find((advert) => advert._id === advertId);
+  [getModalAdvertId, getAdverts, getFavorites],
+  (advertId, adverts, favorites) => {
+    if (adverts.length) {
+      return adverts.find((advert) => advert._id === advertId);
+    } else {
+      return favorites.find((advert) => advert._id === advertId);
+    }
   }
 );
 
 export const getAdvertsToShow = createSelector(
   [getAdverts, getAdvertsFilter, getAdvertsPage],
   (adverts, filter, page) => {
-    const numberAddedItems = 4;
     const isFilterApplied =
       !!filter.location || !!filter.form || !!filter.details.length;
     if (isFilterApplied) {
@@ -45,9 +51,17 @@ export const getAdvertsToShow = createSelector(
         });
         filteredData = [...data];
       }
-      return filteredData.slice(0, numberAddedItems * page);
+      return filteredData.slice(0, NUMBER_ADDED_ITEMS * page);
     } else {
-      return adverts.slice(0, numberAddedItems * page);
+      return adverts.slice(0, NUMBER_ADDED_ITEMS * page);
     }
+  }
+);
+
+export const getIsLoadButtonVisible = createSelector(
+  [getAdvertsToShow, getAdvertsPage],
+  (getAdvertsToShow, page) => {
+    console.log({ getAdvertsToShow, page });
+    return getAdvertsToShow.length >= NUMBER_ADDED_ITEMS * page;
   }
 );

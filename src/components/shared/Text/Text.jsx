@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import { rootStyle } from "src/styles/global";
 
-export const BigText = styled.h2({
+export const BigTextStyled = styled.h2({
   fontSize: 24,
   fontWeight: 600,
   lineHeight: 1.25,
 });
 
-export const DescriptionText = styled.p(
+export const DescriptionTextStyled = styled.p(
   ({ whiteSpace = false, width = "auto", height = "auto" }) => ({
     width,
     height,

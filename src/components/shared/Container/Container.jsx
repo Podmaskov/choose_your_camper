@@ -1,19 +1,19 @@
 import styled from "@emotion/styled";
 
-const ContainerWrap = styled.div({
+export const Container = ({ children }) => {
+  return (
+    <ContainerWrapStyled>
+      <ContainerStyled>{children}</ContainerStyled>
+    </ContainerWrapStyled>
+  );
+};
+
+const ContainerWrapStyled = styled.div({
   display: "flex",
   justifyContent: "center",
 });
 
-const ContainerStyle = styled.div({
+const ContainerStyled = styled.div({
   width: 1440,
   padding: "100px 64px 0 64px",
 });
-
-export const Container = ({ children }) => {
-  return (
-    <ContainerWrap>
-      <ContainerStyle>{children}</ContainerStyle>
-    </ContainerWrap>
-  );
-};

@@ -1,5 +1,5 @@
 import { Avatar } from "./Avatar/Avatar";
-import { Button, IconButton } from "./Button/Button";
+import { ButtonStyled, IconButtonStyled } from "./Button/Button";
 import { FilterBtn } from "./FilterBtn/FilterBtn";
 import { Input } from "./Input/Input";
 import { Textarea } from "./Textarea/Textarea";
@@ -10,14 +10,14 @@ import { Rating } from "./Rating/Rating";
 import { Stars } from "./Stars/Stars";
 import { Container } from "./Container/Container";
 import { Located } from "./Located/Located";
-import { BigText, DescriptionText } from "./Text/Text";
+import { BigTextStyled, DescriptionTextStyled } from "./Text/Text";
 import { Portal } from "./Portal/Portal";
 import { Modal } from "./Modal/Modal";
-import { Image } from "./Image/Image";
+import { ImageStyled } from "./Image/Image";
 export {
   Avatar,
-  Button,
-  IconButton,
+  ButtonStyled,
+  IconButtonStyled,
   FilterBtn,
   Input,
   Textarea,
@@ -27,10 +27,10 @@ export {
   Stars,
   Container,
   Located,
-  BigText,
-  DescriptionText,
+  BigTextStyled,
+  DescriptionTextStyled,
   Modal,
   Portal,
-  Image,
+  ImageStyled,
   DatePicker,
 };

@@ -17,41 +17,7 @@ import Water from "src/assets/Water.svg?react";
 import Petrol from "src/assets/Petrol.svg?react";
 import Microwave from "src/assets/Microwave.svg?react";
 
-const CarOptionListScrollWrap = styled.div({
-  position: "relative",
-
-  ":hover::after": {
-    content: '""',
-    position: "absolute",
-    bottom: -7,
-    left: 0,
-    right: 0,
-    height: "10px",
-    background:
-      "linear-gradient(to top, rgba(242,244,247,0.3), rgba(242,244,247,0))",
-    borderRadius: "0 0 20px 20px",
-  },
-});
-
-const CarOptionListStyle = styled.ul(({ wrapHeight }) => ({
-  maxHeight: wrapHeight,
-  overflowY: "auto",
-  display: "flex",
-  flexWrap: "wrap",
-  gap: 8,
-  marginBottom: 18,
-  "::-webkit-scrollbar": {
-    display: "none",
-  },
-  scrollbarWidth: "none",
-  msOverflowStyle: "none",
-
-  ":hover": {
-    cursor: "pointer",
-  },
-}));
-
-const OptionLabelMap = {
+const OPTION_LABEL_MAP = {
   airConditioner: "AC",
   bathroom: "Bathroom",
   kitchen: "Kitchen",
@@ -71,7 +37,7 @@ const OptionLabelMap = {
   engine: "Petrol",
 };
 
-const IconMap = {
+const ICON_MAP = {
   airConditioner: AC,
   bathroom: Shower,
   kitchen: Kitchen,
@@ -95,9 +61,11 @@ export const CarOptionList = ({ carOptions, wrapHeight = 100 }) => {
   const peeperCarOption = Object.keys(carOptions).reduce((acc, key) => {
     if (carOptions[key] > 0 && typeof carOptions[key] === "number") {
       acc.push({
-        icon: IconMap[key],
+        icon: ICON_MAP[key],
         label: `${carOptions[key] > 1 ? carOptions[key] : ""} ${
-          carOptions[key] > 1 ? OptionLabelMap[key] + "s" : OptionLabelMap[key]
+          carOptions[key] > 1
+            ? OPTION_LABEL_MAP[key] + "s"
+            : OPTION_LABEL_MAP[key]
         }`,
       });
     }
@@ -107,25 +75,59 @@ export const CarOptionList = ({ carOptions, wrapHeight = 100 }) => {
       const isItAutomatic =
         key === "transmission" && carOptions[key] === "automatic";
       if (isItPetrolCar) {
-        acc.push({ icon: IconMap[key], label: OptionLabelMap[key] });
+        acc.push({ icon: ICON_MAP[key], label: OPTION_LABEL_MAP[key] });
       }
       if (isItAutomatic) {
-        acc.push({ icon: IconMap[key], label: OptionLabelMap[key] });
+        acc.push({ icon: ICON_MAP[key], label: OPTION_LABEL_MAP[key] });
       }
       if (key !== "engine" && key !== "transmission") {
-        acc.push({ icon: IconMap[key], label: OptionLabelMap[key] });
+        acc.push({ icon: ICON_MAP[key], label: OPTION_LABEL_MAP[key] });
       }
     }
     return acc;
   }, []);
 
   return (
-    <CarOptionListScrollWrap>
-      <CarOptionListStyle wrapHeight={wrapHeight}>
+    <CarOptionListScrollWrapStyled>
+      <CarOptionListStyled wrapHeight={wrapHeight}>
         {peeperCarOption.map((option, index) => {
           return <CarOption key={index} option={option} />;
         })}
-      </CarOptionListStyle>
-    </CarOptionListScrollWrap>
+      </CarOptionListStyled>
+    </CarOptionListScrollWrapStyled>
   );
 };
+
+const CarOptionListScrollWrapStyled = styled.div({
+  position: "relative",
+
+  ":hover::after": {
+    content: '""',
+    position: "absolute",
+    bottom: -7,
+    left: 0,
+    right: 0,
+    height: "10px",
+    background:
+      "linear-gradient(to top, rgba(242,244,247,0.3), rgba(242,244,247,0))",
+    borderRadius: "0 0 20px 20px",
+  },
+});
+
+const CarOptionListStyled = styled.ul(({ wrapHeight }) => ({
+  maxHeight: wrapHeight,
+  overflowY: "auto",
+  display: "flex",
+  flexWrap: "wrap",
+  gap: 8,
+  marginBottom: 18,
+  "::-webkit-scrollbar": {
+    display: "none",
+  },
+  scrollbarWidth: "none",
+  msOverflowStyle: "none",
+
+  ":hover": {
+    cursor: "pointer",
+  },
+}));

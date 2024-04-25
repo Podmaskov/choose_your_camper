@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { rootStyle } from "../../../styles/global";
 
-export const Button = styled.button(({ secondary }) => ({
+export const ButtonStyled = styled.button(({ secondary }) => ({
   display: "inline-flex",
   justifyContent: "center",
   alignItems: "center",
@@ -21,7 +21,7 @@ export const Button = styled.button(({ secondary }) => ({
   },
 }));
 
-export const IconButton = styled.button({
+export const IconButtonStyled = styled.button({
   display: "flex",
   fontSize: 0,
   alignItems: "center",

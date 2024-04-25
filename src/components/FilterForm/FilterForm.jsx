@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { rootStyle } from "src/styles/global";
-import { Input, FilterBtn, Button } from "src/components/shared";
+import { Input, FilterBtn, ButtonStyled } from "src/components/shared";
 import { useForm } from "react-hook-form";
 import MapPin from "src/assets/MapPin.svg?react";
 import AC from "src/assets/Wind.svg?react";
@@ -12,40 +12,8 @@ import Van from "src/assets/Car_2.svg?react";
 import FullyIntegrated from "src/assets/Car.svg?react";
 import Alcove from "src/assets/Car_3.svg?react";
 
-const FormStyled = styled.form({
-  width: 360,
-});
-
-const SmallText = styled.p({
-  color: rootStyle.color.grey,
-  lineHeight: 1.5,
-  marginTop: 32,
-  marginBottom: 14,
-});
-
-const Title = styled.h2({
-  fontSize: 20,
-  fontWeight: 600,
-  lineHeight: 1.2,
-  paddingBottom: 24,
-  marginBottom: 24,
-  borderBottom: `1px solid ${rootStyle.color.black_10}`,
-});
-
-const FilterBtnWrap = styled.div(({ extraMargin }) => ({
-  display: "flex",
-  columnGap: 10,
-  rowGap: 8,
-  flexWrap: "wrap",
-  marginBottom: extraMargin ? 64 : 32,
-}));
-
 export const FilterForm = ({ onSubmit }) => {
-  const {
-    register,
-    handleSubmit,
-    // formState: { errors },
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: {
       location: "",
       form: "",
@@ -63,9 +31,9 @@ export const FilterForm = ({ onSubmit }) => {
         leftIcon
         icon={MapPin}
       />
-      <SmallText>Filters</SmallText>
-      <Title>Vehicle equipment</Title>
-      <FilterBtnWrap>
+      <SmallTextStyled>Filters</SmallTextStyled>
+      <TitleStyled>Vehicle equipment</TitleStyled>
+      <FilterBtnWrapStyled>
         <FilterBtn
           {...register("details")}
           label="AC"
@@ -106,9 +74,9 @@ export const FilterForm = ({ onSubmit }) => {
           type="checkbox"
           name="details"
         />
-      </FilterBtnWrap>
-      <Title>Vehicle type</Title>
-      <FilterBtnWrap extraMargin>
+      </FilterBtnWrapStyled>
+      <TitleStyled>Vehicle type</TitleStyled>
+      <FilterBtnWrapStyled extraMargin>
         <FilterBtn
           {...register("form")}
           label="Van"
@@ -133,8 +101,36 @@ export const FilterForm = ({ onSubmit }) => {
           value="alcove"
           name="form"
         />
-      </FilterBtnWrap>
-      <Button type="submit">Search</Button>
+      </FilterBtnWrapStyled>
+      <ButtonStyled type="submit">Search</ButtonStyled>
     </FormStyled>
   );
 };
+
+const FormStyled = styled.form({
+  width: 360,
+});
+
+const SmallTextStyled = styled.p({
+  color: rootStyle.color.grey,
+  lineHeight: 1.5,
+  marginTop: 32,
+  marginBottom: 14,
+});
+
+const TitleStyled = styled.h2({
+  fontSize: 20,
+  fontWeight: 600,
+  lineHeight: 1.2,
+  paddingBottom: 24,
+  marginBottom: 24,
+  borderBottom: `1px solid ${rootStyle.color.black_10}`,
+});
+
+const FilterBtnWrapStyled = styled.div(({ extraMargin }) => ({
+  display: "flex",
+  columnGap: 10,
+  rowGap: 8,
+  flexWrap: "wrap",
+  marginBottom: extraMargin ? 64 : 32,
+}));

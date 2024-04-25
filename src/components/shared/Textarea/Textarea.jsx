@@ -3,6 +3,15 @@ import { forwardRef } from "react";
 import styled from "@emotion/styled";
 import { rootStyle } from "src/styles/global";
 
+export const Textarea = forwardRef(({ label, ...props }, ref) => {
+  return (
+    <LabelStyled>
+      {label}
+      <TextareaStyled ref={ref} {...props} />
+    </LabelStyled>
+  );
+});
+
 const TextareaStyled = styled.textarea({
   padding: 18,
   height: 114,
@@ -23,13 +32,4 @@ const TextareaStyled = styled.textarea({
 const LabelStyled = styled.label({
   color: rootStyle.color.black_60,
   lineHeight: 1.5,
-});
-
-export const Textarea = forwardRef(({ label, ...props }, ref) => {
-  return (
-    <LabelStyled>
-      {label}
-      <TextareaStyled ref={ref} {...props} />
-    </LabelStyled>
-  );
 });

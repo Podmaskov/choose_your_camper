@@ -8,44 +8,23 @@ import {
   getAdvertsToShow,
   getAdvertsPage,
   getAdvertsLoading,
+  getIsLoadButtonVisible,
 } from "src/store/adverts/selectors";
 import { setPage, setFilter } from "src/store/adverts/advertsSlice";
 import { openModal } from "src/store/modal/modalSlice";
 import { AdCard } from "src/components/AdCard/AdCard";
 import { FilterForm } from "src/components/FilterForm/FilterForm";
-import { Button } from "src/components/shared";
-
-const CatalogWrapStyled = styled.div({
-  display: "flex",
-  justifyContent: "space-between",
-  width: "100%",
-});
-
-const AddCardWrapStyled = styled.div({
-  display: "flex",
-  flexDirection: "column",
-  paddingBottom: 100,
-  gap: 32,
-});
-
-const LoaderStyled = styled(MagnifyingGlass)({
-  marginLeft: "auto",
-  marginRight: "auto",
-});
-
-const buttonStyle = css({
-  width: 147,
-  margin: "auto",
-  marginTop: 50,
-});
+import { ButtonStyled } from "src/components/shared";
 
 const Catalog = () => {
   const dispatch = useDispatch();
   const adverts = useSelector(getAdvertsToShow);
   const isAdvertsLoading = useSelector(getAdvertsLoading);
   const page = useSelector(getAdvertsPage);
+  const isLoadButtonVisible = useSelector(getIsLoadButtonVisible);
 
-  console.log("isAdvertsLoading", isAdvertsLoading);
+  console.log(1, isLoadButtonVisible);
+
   useEffect(() => {
     const promise = dispatch(fetchAdverts());
     return () => {
@@ -81,15 +60,15 @@ const Catalog = () => {
               onShowMore={() => dispatch(openModal(advert._id))}
             />
           ))}
-        {!isAdvertsLoading && (
-          <Button
+        {!isAdvertsLoading && isLoadButtonVisible && (
+          <ButtonStyled
             css={buttonStyle}
             type="button"
             secondary
             onClick={handlerPage}
           >
             Load more
-          </Button>
+          </ButtonStyled>
         )}
       </AddCardWrapStyled>
     </CatalogWrapStyled>
@@ -97,3 +76,27 @@ const Catalog = () => {
 };
 
 export default Catalog;
+
+const CatalogWrapStyled = styled.div({
+  display: "flex",
+  justifyContent: "space-between",
+  width: "100%",
+});
+
+const AddCardWrapStyled = styled.div({
+  display: "flex",
+  flexDirection: "column",
+  paddingBottom: 100,
+  gap: 32,
+});
+
+const LoaderStyled = styled(MagnifyingGlass)({
+  marginLeft: "auto",
+  marginRight: "auto",
+});
+
+const buttonStyle = css({
+  width: 147,
+  margin: "auto",
+  marginTop: 50,
+});

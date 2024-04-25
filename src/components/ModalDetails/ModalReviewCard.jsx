@@ -1,6 +1,20 @@
 import styled from "@emotion/styled";
-// import { rootStyle } from "src/styles/global";
-import { Avatar, Stars, DescriptionText } from "src/components/shared";
+import { Avatar, Stars, DescriptionTextStyled } from "src/components/shared";
+
+export const ModalReviewCard = ({ name, rating, description }) => {
+  return (
+    <ReviewCardStyled>
+      <CardHeaderStyled>
+        <Avatar name={name} />
+        <NameStarsWrapStyled>
+          <NameTextStyled>{name}</NameTextStyled>
+          <Stars rating={rating} />
+        </NameStarsWrapStyled>
+      </CardHeaderStyled>
+      <DescriptionTextStyled>{description}</DescriptionTextStyled>
+    </ReviewCardStyled>
+  );
+};
 
 const ReviewCardStyled = styled.li({
   display: "flex",
@@ -25,18 +39,3 @@ const NameTextStyled = styled.p({
   fontWeight: 600,
   lineHeight: 1.3,
 });
-
-export const ModalReviewCard = ({ name, rating, description }) => {
-  return (
-    <ReviewCardStyled>
-      <CardHeaderStyled>
-        <Avatar name={name} />
-        <NameStarsWrapStyled>
-          <NameTextStyled>{name}</NameTextStyled>
-          <Stars rating={rating} />
-        </NameStarsWrapStyled>
-      </CardHeaderStyled>
-      <DescriptionText>{description}</DescriptionText>
-    </ReviewCardStyled>
-  );
-};

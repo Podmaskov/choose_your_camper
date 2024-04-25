@@ -2,7 +2,28 @@ import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { rootStyle } from "src/styles/global";
 import videoLing from "src/assets/caravan.mp4";
-import { Button } from "src/components/shared";
+import { ButtonStyled } from "src/components/shared";
+
+const Home = () => {
+  const navigate = useNavigate();
+  return (
+    <>
+      <VideoStyled autoPlay muted loop id="caravan">
+        <source src={videoLing} type="video/mp4" />
+      </VideoStyled>
+      <SloganButtonWrapStyled>
+        <SloganTextStyled>
+          Rent a caravan and embark on an unforgettable journey!
+        </SloganTextStyled>
+        <CTABtnStyled type="button" onClick={() => navigate("/catalog")}>
+          Go to journey
+        </CTABtnStyled>
+      </SloganButtonWrapStyled>
+    </>
+  );
+};
+
+export default Home;
 
 const VideoStyled = styled.video({
   position: "absolute",
@@ -35,28 +56,7 @@ const SloganButtonWrapStyled = styled.div({
   transform: "translate(-50%, -50%)",
 });
 
-const CTABtnStyled = styled(Button)({
+const CTABtnStyled = styled(ButtonStyled)({
   width: "fit-content",
   margin: "auto",
 });
-
-const Home = () => {
-  const navigate = useNavigate();
-  return (
-    <>
-      <VideoStyled autoPlay muted loop id="caravan">
-        <source src={videoLing} type="video/mp4" />
-      </VideoStyled>
-      <SloganButtonWrapStyled>
-        <SloganTextStyled>
-          Rent a caravan and embark on an unforgettable journey!
-        </SloganTextStyled>
-        <CTABtnStyled type="button" onClick={() => navigate("/catalog")}>
-          Go to journey
-        </CTABtnStyled>
-      </SloganButtonWrapStyled>
-    </>
-  );
-};
-
-export default Home;

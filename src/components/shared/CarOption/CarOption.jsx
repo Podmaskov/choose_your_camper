@@ -1,6 +1,16 @@
 import styled from "@emotion/styled";
 import { rootStyle } from "src/styles/global";
 
+export const CarOption = ({ option }) => {
+  const Icon = option.icon;
+  return (
+    <CarOptionWrapStyled>
+      <Icon />
+      <p>{option.label}</p>
+    </CarOptionWrapStyled>
+  );
+};
+
 const CarOptionWrapStyled = styled.li({
   width: "fit-content",
   display: "flex",
@@ -11,13 +21,3 @@ const CarOptionWrapStyled = styled.li({
   borderRadius: 100,
   background: rootStyle.color.lightGrey,
 });
-
-export const CarOption = ({ option }) => {
-  const Icon = option.icon;
-  return (
-    <CarOptionWrapStyled>
-      <Icon />
-      <p>{option.label}</p>
-    </CarOptionWrapStyled>
-  );
-};

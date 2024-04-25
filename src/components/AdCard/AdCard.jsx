@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { styles } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
+import { rootStyle } from "src/styles/global";
 import {
   addFavorite,
   removeFavorite,
@@ -9,20 +9,16 @@ import {
 import { getFavorites } from "src/store/favorites/selectors";
 import {
   Rating,
-  Button,
-  IconButton,
+  ButtonStyled,
+  IconButtonStyled,
   Located,
   CarOptionList,
-  BigText,
-  DescriptionText,
-  Image,
+  BigTextStyled,
+  DescriptionTextStyled,
+  ImageStyled,
 } from "src/components/shared";
 import Heart from "src/assets/Heart.svg?react";
 import HeartRed from "src/assets/HeartRed.svg?react";
-
-const ModalButtonStyled = styled(Button)({
-  padding: "16px 40px",
-});
 
 export const AdCard = ({ advert, onShowMore }) => {
   const dispatch = useDispatch();
@@ -43,39 +39,68 @@ export const AdCard = ({ advert, onShowMore }) => {
 
   const handleFavorite = () => {
     if (isAddedToFavorites) {
-      console.log("removeFavorite");
       dispatch(removeFavorite(_id));
     } else {
       dispatch(addFavorite(advert));
     }
   };
   return (
-    <div style={{ width: 890 }}>
-      <div css={styles.wrapper}>
-        <Image src={gallery[0]} alt="car" />
-        <div>
-          <div css={styles.nameAndPriceWrap}>
-            <BigText>{name}</BigText>
-            <div css={styles.priceWrap}>
-              <BigText>{`€${price}`}</BigText>
-              <IconButton type="button" onClick={handleFavorite}>
-                {isAddedToFavorites ? <HeartRed /> : <Heart />}
-              </IconButton>
-            </div>
-          </div>
-          <div css={styles.ratingAndLocationWrap}>
-            <Rating rating={rating} reviews={reviews.length} />
-            <Located text={location} />
-          </div>
-          <DescriptionText whiteSpace width={525} height={24}>
-            {description}
-          </DescriptionText>
-          <CarOptionList carOptions={details} />
-          <ModalButtonStyled type="button" onClick={onShowMore}>
-            Show more
-          </ModalButtonStyled>
-        </div>
+    <WrapperStyled>
+      <ImageStyled src={gallery[0]} alt="car" />
+      <div>
+        <NameAndPriceWrapStyled>
+          <BigTextStyled>{name}</BigTextStyled>
+          <PriceWrapStyled>
+            <BigTextStyled>{`€${price}`}</BigTextStyled>
+            <IconButtonStyled type="button" onClick={handleFavorite}>
+              {isAddedToFavorites ? <HeartRed /> : <Heart />}
+            </IconButtonStyled>
+          </PriceWrapStyled>
+        </NameAndPriceWrapStyled>
+        <RatingAndLocationWrapStyled>
+          <Rating rating={rating} reviews={reviews.length} />
+          <Located text={location} />
+        </RatingAndLocationWrapStyled>
+        <DescriptionTextStyled whiteSpace width={525} height={24}>
+          {description}
+        </DescriptionTextStyled>
+        <CarOptionList carOptions={details} />
+        <ModalButtonStyled type="button" onClick={onShowMore}>
+          Show more
+        </ModalButtonStyled>
       </div>
-    </div>
+    </WrapperStyled>
   );
 };
+
+const WrapperStyled = styled.div({
+  width: 890,
+  display: "flex",
+  justifyContent: "space-between",
+  gap: 24,
+  padding: 24,
+  borderRadius: 20,
+  border: `1px solid ${rootStyle.color.black_20}`,
+});
+
+const NameAndPriceWrapStyled = styled.div({
+  display: "flex",
+  justifyContent: "space-between",
+  marginBottom: 8,
+});
+
+const PriceWrapStyled = styled.div({
+  display: "flex",
+  alignItems: "center",
+  gap: 12,
+});
+
+const ModalButtonStyled = styled(ButtonStyled)({
+  padding: "16px 40px",
+});
+
+const RatingAndLocationWrapStyled = styled.div({
+  display: "flex",
+  gap: 16,
+  marginBottom: 24,
+});

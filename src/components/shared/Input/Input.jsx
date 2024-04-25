@@ -4,6 +4,28 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { rootStyle } from "src/styles/global";
 
+export const Input = forwardRef(
+  (
+    { label, leftIcon = false, wrightIcon = false, icon: Icon, ...props },
+    ref
+  ) => {
+    return (
+      <LabelStyled>
+        {label}
+        {(leftIcon || wrightIcon) && (
+          <Icon css={wrightIcon ? writeIconStyle : leftIconStyle} />
+        )}
+        <InputStyled
+          ref={ref}
+          {...props}
+          leftIcon={leftIcon}
+          wrightIcon={wrightIcon}
+        />
+      </LabelStyled>
+    );
+  }
+);
+
 const InputStyled = styled.input(({ leftIcon, wrightIcon }) => ({
   display: "flex",
   paddingTop: 18,
@@ -60,26 +82,4 @@ const leftIconStyle = css(
     left: 18,
   },
   iconStyle
-);
-
-export const Input = forwardRef(
-  (
-    { label, leftIcon = false, wrightIcon = false, icon: Icon, ...props },
-    ref
-  ) => {
-    return (
-      <LabelStyled>
-        {label}
-        {(leftIcon || wrightIcon) && (
-          <Icon css={wrightIcon ? writeIconStyle : leftIconStyle} />
-        )}
-        <InputStyled
-          ref={ref}
-          {...props}
-          leftIcon={leftIcon}
-          wrightIcon={wrightIcon}
-        />
-      </LabelStyled>
-    );
-  }
 );

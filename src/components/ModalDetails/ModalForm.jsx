@@ -1,34 +1,13 @@
 import { useForm, Controller } from "react-hook-form";
 import styled from "@emotion/styled";
 import { rootStyle } from "src/styles/global";
-
 import {
   Input,
-  DescriptionText,
+  DescriptionTextStyled,
   Textarea,
-  Button,
+  ButtonStyled,
   DatePicker,
 } from "src/components/shared";
-
-const ModalFormStyled = styled.form({
-  padding: 24,
-  borderRadius: 10,
-  border: `1px solid ${rootStyle.color.black_20}`,
-  flexShrink: 0,
-});
-
-const TitleStyled = styled.h2({
-  fontSize: 20,
-  fontWeight: 600,
-  lineHeight: 1.2,
-});
-
-const InputListStyled = styled.div({
-  display: "flex",
-  flexDirection: "column",
-  gap: 14,
-  margin: "24px 0",
-});
 
 export const ModalForm = () => {
   const { register, handleSubmit, control } = useForm();
@@ -40,9 +19,9 @@ export const ModalForm = () => {
   return (
     <ModalFormStyled onSubmit={handleSubmit(onSubmit)}>
       <TitleStyled>Book your campervan now</TitleStyled>
-      <DescriptionText>
+      <DescriptionTextStyled>
         Stay connected! We are always ready to help you.
-      </DescriptionText>
+      </DescriptionTextStyled>
       <InputListStyled>
         <Input
           {...register("name", { required: true })}
@@ -74,7 +53,27 @@ export const ModalForm = () => {
           placeholder="Comment"
         />
       </InputListStyled>
-      <Button type="submit">Send</Button>
+      <ButtonStyled type="submit">Send</ButtonStyled>
     </ModalFormStyled>
   );
 };
+
+const ModalFormStyled = styled.form({
+  padding: 24,
+  borderRadius: 10,
+  border: `1px solid ${rootStyle.color.black_20}`,
+  flexShrink: 0,
+});
+
+const TitleStyled = styled.h2({
+  fontSize: 20,
+  fontWeight: 600,
+  lineHeight: 1.2,
+});
+
+const InputListStyled = styled.div({
+  display: "flex",
+  flexDirection: "column",
+  gap: 14,
+  margin: "24px 0",
+});

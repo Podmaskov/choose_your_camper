@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Image = styled.img({
+export const ImageStyled = styled.img({
   display: "block",
   borderRadius: 10,
   objectFit: "cover",

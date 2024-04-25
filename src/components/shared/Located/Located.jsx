@@ -2,6 +2,14 @@ import styled from "@emotion/styled";
 import { rootStyle } from "src/styles/global";
 import MapPin from "src/assets/MapPin.svg?react";
 
+export const Located = ({ text }) => {
+  return (
+    <LocatedStyled>
+      <MapPin /> <span>{text}</span>
+    </LocatedStyled>
+  );
+};
+
 const LocatedStyled = styled.div({
   display: "flex",
   alignItems: "center",
@@ -14,11 +22,3 @@ const LocatedStyled = styled.div({
     strokeOpacity: 1,
   },
 });
-
-export const Located = ({ text }) => {
-  return (
-    <LocatedStyled>
-      <MapPin /> <span>{text}</span>
-    </LocatedStyled>
-  );
-};

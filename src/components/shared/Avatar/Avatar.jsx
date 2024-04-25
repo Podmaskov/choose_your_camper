@@ -1,7 +1,11 @@
 import styled from "@emotion/styled";
 import { rootStyle } from "src/styles/global";
 
-const AvatarWrap = styled.div({
+export const Avatar = ({ name }) => {
+  return <AvatarWrapStyled>{name[0].toUpperCase()}</AvatarWrapStyled>;
+};
+
+const AvatarWrapStyled = styled.div({
   width: 60,
   height: 60,
   borderRadius: "50%",
@@ -13,7 +17,3 @@ const AvatarWrap = styled.div({
   fontSize: 24,
   lineHeight: 1.2,
 });
-
-export const Avatar = ({ name }) => {
-  return <AvatarWrap>{name[0].toUpperCase()}</AvatarWrap>;
-};
