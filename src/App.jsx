@@ -1,8 +1,9 @@
+import { lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "src/pages/Home/Home";
-import Catalog from "src/pages/Catalog/Catalog";
-import Favorites from "src/pages/Favorites/Favorites";
 import Layout from "src/components/Layout/Layout";
+const Catalog = lazy(() => import("src/pages/Catalog/Catalog"));
+const Home = lazy(() => import("src/pages/Home/Home"));
+const Favorites = lazy(() => import("src/pages/Favorites/Favorites"));
 
 function App() {
   return (
