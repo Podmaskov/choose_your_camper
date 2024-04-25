@@ -50,7 +50,7 @@ export const FilterBtn = forwardRef(({ label, icon: Icon, ...props }, ref) => {
   return (
     <label css={css(labelStyle)}>
       <div css={css(infoBlock)}>
-        <Icon />
+        <Icon width={32} height={32} />
         <p css={css(textStyle)}>{label}</p>
         <input ref={ref} css={css(hideCheckbox)} {...props} />
       </div>

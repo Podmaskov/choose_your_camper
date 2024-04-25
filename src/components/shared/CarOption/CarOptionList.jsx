@@ -39,7 +39,7 @@ const CarOptionListStyle = styled.ul(({ wrapHeight }) => ({
   display: "flex",
   flexWrap: "wrap",
   gap: 8,
-  marginBottom: 24,
+  marginBottom: 18,
   "::-webkit-scrollbar": {
     display: "none",
   },

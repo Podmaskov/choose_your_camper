@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { styles } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,6 +19,10 @@ import {
 } from "src/components/shared";
 import Heart from "src/assets/Heart.svg?react";
 import HeartRed from "src/assets/HeartRed.svg?react";
+
+const ModalButtonStyled = styled(Button)({
+  padding: "16px 40px",
+});
 
 export const AdCard = ({ advert, onShowMore }) => {
   const dispatch = useDispatch();
@@ -66,9 +71,9 @@ export const AdCard = ({ advert, onShowMore }) => {
             {description}
           </DescriptionText>
           <CarOptionList carOptions={details} />
-          <Button type="button" onClick={onShowMore}>
+          <ModalButtonStyled type="button" onClick={onShowMore}>
             Show more
-          </Button>
+          </ModalButtonStyled>
         </div>
       </div>
     </div>
